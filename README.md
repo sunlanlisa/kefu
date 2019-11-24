@@ -137,24 +137,41 @@ https://apis.cleargrass.com/v1/portal/apis/devices?access=384c104405bd11ea80cc52
 
 #### 2.1.2 返回结果
 
-参数名称						|类型		|出现要求	|描述  
-:----						    |:---		|:------	|:---	
-code						    |int		|R			|响应码，代码定义请见“附录A 响应吗说明”
-msg						        |string		|R			|&nbsp;
-timestamp						|int		|R			|响应时间
-data						    |object		|R			|数据正文
-&emsp;total				        |int		|R			|设备总数
-&emsp;devices				    |[]object	|R			|设备数据
-&emsp;&emsp;id				    |string		|R			|设备id
-&emsp;&emsp;name				|string		|R			|设备名称
-&emsp;&emsp;mac				    |string		|R			|设备mac地址
-&emsp;&emsp;sn				    |string		|R			|设备序列号
-&emsp;&emsp;version				|string		|R			|设备版本
-&emsp;&emsp;created_at			|string		|R			|设备注册时间
-&emsp;&emsp;product			    |object		|R			|产品信息
-&emsp;&emsp;&emsp;name			|string		|C			|产品名称
-&emsp;&emsp;&emsp;brand			|string		|C			|产品品牌
-&emsp;&emsp;&emsp;protocol		|string		|C			|产品协议
+参数名称						         |类型		|出现要求	|描述  
+:----						            |:---		|:------	|:---	
+code						            |int		|R			|响应码，代码定义请见“附录A 响应吗说明”
+msg						                |string		|R			|&nbsp;
+timestamp						        |int		|R			|响应时间
+data						            |object		|R			|数据正文
+&emsp;total				                |int		|R			|设备总数
+&emsp;devices				            |[]object	|R			|设备数据
+&emsp;&emsp;device				        |object	    |R			|设备信息
+&emsp;&emsp;&emsp;id				    |string		|R			|设备id
+&emsp;&emsp;&emsp;name				    |string		|R			|设备名称
+&emsp;&emsp;&emsp;mac				    |string		|R			|设备mac地址
+&emsp;&emsp;&emsp;sn				    |string		|R			|设备序列号
+&emsp;&emsp;&emsp;version				|string		|R			|设备版本
+&emsp;&emsp;&emsp;created_at			|string		|R			|设备注册时间
+&emsp;&emsp;&emsp;product			    |object		|R			|产品信息
+&emsp;&emsp;&emsp;&emsp;name			|string		|C			|产品名称
+&emsp;&emsp;&emsp;&emsp;brand			|string		|C			|产品品牌
+&emsp;&emsp;&emsp;&emsp;protocol		|string		|C			|产品协议
+&emsp;&emsp;data				        |object	    |C			|设备数据
+&emsp;&emsp;&emsp;battery				|object		|C			|电量
+&emsp;&emsp;&emsp;&emsp;value		    |float		|C			|数值
+&emsp;&emsp;&emsp;&emsp;alarm		    |bool		|C			|是否超限
+&emsp;&emsp;&emsp;humidity				|object		|C			|湿度
+&emsp;&emsp;&emsp;&emsp;value		    |float		|C			|数值
+&emsp;&emsp;&emsp;&emsp;alarm		    |bool		|C			|是否超限
+&emsp;&emsp;&emsp;pressure				|object		|C			|气压
+&emsp;&emsp;&emsp;&emsp;value		    |float		|C			|数值
+&emsp;&emsp;&emsp;&emsp;alarm		    |bool		|C			|是否超限
+&emsp;&emsp;&emsp;temperature			|object		|C			|温度
+&emsp;&emsp;&emsp;&emsp;value		    |float		|C			|数值
+&emsp;&emsp;&emsp;&emsp;alarm		    |bool		|C			|是否超限
+&emsp;&emsp;&emsp;timestamp			    |object		|C			|时间
+&emsp;&emsp;&emsp;&emsp;value		    |float		|C			|数值
+&emsp;&emsp;&emsp;&emsp;alarm		    |bool		|C			|是否超限
 
 示例：
 
@@ -164,33 +181,80 @@ data						    |object		|R			|数据正文
     "msg": "success",
     "timestamp": 1573483266,
     "data": {
+        "total": 2,
         "devices":[
             {
-                "id": "03654079cb0911e981d5380025e8fb21",
-                "name": "温湿度气压计",
-                "mac": "58:2D:34:46:04:42",
-                "sn": "82869B172C688BED",
-                "version": "1.0.1_0049",
-                "created_at": 1573034091,
-                "product": {
-                    "name":"温湿度气压计",
-                    "brand":"青萍",
-                    "protocol":"NB-IoT"
+                "device":{
+                    "id": "03654079cb0911e981d5380025e8fb21",
+                    "name": "温湿度气压计",
+                    "mac": "58:2D:34:46:04:42",
+                    "sn": "82869B172C688BED",
+                    "version": "1.0.1_0049",
+                    "created_at": 1573034091,
+                    "product": {
+                        "name":"温湿度气压计",
+                        "brand":"青萍",
+                        "protocol":"NB-IoT"
+                    }
+                "data":{
+                    "battery": {
+                        "value": 70,
+                        "alarm": false
+                    },
+                    "humidity": {
+                        "value": 22.2,
+                        "alarm": false
+                    },
+                    "pressure": {
+                        "value": 103.29,
+                        "alarm": false
+                    },
+                    "temperature": {
+                        "value": 20.8,
+                        "alarm": false
+                    },
+                    "timestamp": {
+                        "value": 1574565267,
+                        "alarm": false
+                    }
                 }
             },
             {
-                "id": "4449D041BE6430179D8BE229B9819E1A",
-                "name": "气压计",
-                "mac": "58:2D:34:46:04:77",
-                "sn": "82869B172C688BED",
-                "version": "1.0.1_0049",
-                "created_at": 1573034091,
-                "product": {
-                    "name":"温湿度气压计",
-                    "brand":"青萍",
-                    "protocol":"NB-IoT"
+                "device":{
+                    "id": "03654079cb0911e981d5380025e8fb21",
+                    "name": "温湿度气压计",
+                    "mac": "58:2D:34:46:04:42",
+                    "sn": "82869B172C688BED",
+                    "version": "1.0.1_0049",
+                    "created_at": 1573034091,
+                    "product": {
+                        "name":"温湿度气压计",
+                        "brand":"青萍",
+                        "protocol":"NB-IoT"
+                    }
+                "data":{
+                    "battery": {
+                        "value": 70,
+                        "alarm": false
+                    },
+                    "humidity": {
+                        "value": 22.2,
+                        "alarm": false
+                    },
+                    "pressure": {
+                        "value": 103.29,
+                        "alarm": false
+                    },
+                    "temperature": {
+                        "value": 20.8,
+                        "alarm": false
+                    },
+                    "timestamp": {
+                        "value": 1574565267,
+                        "alarm": false
+                    }
                 }
-            }
+            },
         ]
     }
 }
